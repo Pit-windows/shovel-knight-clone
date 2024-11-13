@@ -34,6 +34,7 @@ Scene* LevelLoader::load(const std::string& name)
 		PlatformerGameScene* world = new PlatformerGameScene(RectF(0, -12, 224, 15), { 16,16 }, 1 / 100.0f);
 		world->setBackgroundColor(Color(96, 148, 252));
 
+		std::cout << "prova" << std::endl;
 		// terrain
 		new StaticObject(world, RectF(0, 2, 68, 1),  spriteLoader->get("terrain"));
 		// boxes
