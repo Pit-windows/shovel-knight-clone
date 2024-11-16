@@ -35,6 +35,7 @@ SpriteFactory::SpriteFactory()
 	_spriteSheets["tiles"] = loadTextureAutoDetect(renderer, "sprites/stage_tiles.png", _autoTiles["tiles"], { 27, 89, 153 }, { 147, 187, 236 }, 5, true, false);
 	_spriteSheets["link"] = loadTextureAutoDetect(renderer, "sprites/link.png", _autoTiles["link"], { 0, 128, 128}, { 0, 64, 64 });
 	_spriteSheets["prova"] = loadTexture(renderer, "sprites/prova.png");
+	_spriteSheets["knight"] = loadTextureAutoDetect(renderer, "sprites/knight.png", _autoTiles["knight"], { 0, 128, 128 }, { 0, 255, 0 }, 1, true, false, true);
 }
 
 // anchors
@@ -51,11 +52,11 @@ Sprite* SpriteFactory::get(const std::string& id)
 	// single-frame sprites
 	if (id == "terrain")
 	{
-		RectI baseRect(240,336, 16, 16);
+		RectI baseRect(240, 336, 16, 16);
 		rects.push_back(baseRect);
 		return new FilledSprite(_spriteSheets["prova"], rects[0]);
 	}
-		//return new FilledSprite(_spriteSheets["tiles"], _autoTiles["tiles"][7][0]);
+	//return new FilledSprite(_spriteSheets["tiles"], _autoTiles["tiles"][7][0]);
 	else if (id == "brick")
 		return new Sprite(_spriteSheets["tiles"], _autoTiles["tiles"][5][1]);
 	else if (id == "wall")
@@ -66,6 +67,8 @@ Sprite* SpriteFactory::get(const std::string& id)
 		return new Sprite(_spriteSheets["hud"], RectI(1, 2 + 16 * 2, 16 * 16, 13 * 16));
 	else if (id == "gameover")
 		return new Sprite(_spriteSheets["hud"], RectI(260, 253, 16 * 16, 15 * 16));
+	else if (id == "knight_stand")
+		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][0][0]);
 	else if (id == "mario_stand")
 		return new Sprite(_spriteSheets["mario"], _autoTiles["mario"][0][0]);
 	else if (id == "mario_jump")
@@ -84,6 +87,8 @@ Sprite* SpriteFactory::get(const std::string& id)
 		return new FilledSprite(_spriteSheets["tiles"], _autoTiles["tiles"][8][33]);
 
 	// animated sprites
+	else if (id == "knight_walk")
+		return new AnimatedSprite(_spriteSheets["knight"], { _autoTiles["knight"][2].begin(), _autoTiles["knight"][2].begin() + 5 }, 10);
 	else if (id == "mario_walk")
 		return new AnimatedSprite(_spriteSheets["mario"], { _autoTiles["mario"][0].begin() + 2, _autoTiles["mario"][0].begin() + 5 }, 10);
 	else if (id == "mario_run")
