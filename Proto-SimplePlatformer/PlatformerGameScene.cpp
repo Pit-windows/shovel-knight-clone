@@ -22,7 +22,7 @@ PlatformerGameScene::PlatformerGameScene(const RectF& rect, const Point& pixelUn
 	: GameScene(rect, pixelUnitSize, dt)
 {
 	// NES aspect ratio (16 x 15)
-	_view->setRect(RectF(0, -12, 16, 15));
+	_view->setRect(RectF(0, -10, 15, 13));
 }
 
 void PlatformerGameScene::updateControls(float timeToSimulate)

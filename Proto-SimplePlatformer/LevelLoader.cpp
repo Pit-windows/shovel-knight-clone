@@ -62,15 +62,16 @@ Scene* LevelLoader::load(const std::string& name)
 			new StaticObject(world, RectF(7 + i, -3, 1, 1), spriteLoader->get("brick"));
 			new StaticObject(world, RectF(7 + i, -7, 1, 1), spriteLoader->get("brick"));
 		}*/
-		new HammerBrother(world, PointF(21, 0));
-		new HammerBrother(world, PointF(23, -4));
+		//new HammerBrother(world, PointF(21, 0));
+		//new HammerBrother(world, PointF(23, -4));
 
 		// lifts
 		Lift* lift1 = new Lift(world, RectF(7, -2, 3, 0.5f), spriteLoader->get("platform"), false, 10, 10);
 		Lift* lift2 = new Lift(world, RectF(4, -4, 3, 0.5f), spriteLoader->get("platform"), true, 3, 10);
-
+		lift1->toggleFreezed();
+		lift2->toggleFreezed();
 		// mario
-		Mario* mario = new Mario(world, PointF(2.5, 1));
+		Mario* mario = new Mario(world, PointF(2.5, 0));
 		world->setPlayer(mario);
 
 		// trigger example
