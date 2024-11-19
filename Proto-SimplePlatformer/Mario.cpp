@@ -36,7 +36,7 @@ Mario::Mario(Scene* scene, const PointF& pos)
 	_sprites["stand"] = SpriteFactory::instance()->get("knight_stand");
 	_sprites["walk"] = SpriteFactory::instance()->get("knight_walk");
 	_sprites["run"] = SpriteFactory::instance()->get("mario_run");
-	_sprites["skid"] = SpriteFactory::instance()->get("mario_skid");
+	_sprites["skid"] = SpriteFactory::instance()->get("knight_skid");
 	_sprites["jump"] = SpriteFactory::instance()->get("mario_jump");
 	_sprites["die"] = SpriteFactory::instance()->get("mario_die");
 	_sprites["attack"] = SpriteFactory::instance()->get("mario_attack");

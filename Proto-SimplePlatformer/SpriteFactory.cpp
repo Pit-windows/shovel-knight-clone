@@ -73,6 +73,8 @@ Sprite* SpriteFactory::get(const std::string& id)
 		return new Sprite(_spriteSheets["mario"], _autoTiles["mario"][0][0]);
 	else if (id == "mario_jump")
 		return new Sprite(_spriteSheets["mario"], _autoTiles["mario"][0][6]);
+	else if (id == "knight_skid")
+		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][3][0], Direction::LEFT);
 	else if (id == "mario_skid")
 		return new Sprite(_spriteSheets["mario"], _autoTiles["mario"][0][5]);
 	else if (id == "mario_die")
