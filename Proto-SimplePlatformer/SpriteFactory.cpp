@@ -68,7 +68,7 @@ Sprite* SpriteFactory::get(const std::string& id)
 	else if (id == "gameover")
 		return new Sprite(_spriteSheets["hud"], RectI(260, 253, 16 * 16, 15 * 16));
 	else if (id == "knight_stand")
-		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][0][0]);
+		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][0][0], Direction::RIGHT);
 	else if (id == "mario_stand")
 		return new Sprite(_spriteSheets["mario"], _autoTiles["mario"][0][0]);
 	else if (id == "mario_jump")
@@ -88,7 +88,7 @@ Sprite* SpriteFactory::get(const std::string& id)
 
 	// animated sprites
 	else if (id == "knight_walk")
-		return new AnimatedSprite(_spriteSheets["knight"], { _autoTiles["knight"][2].begin(), _autoTiles["knight"][2].begin() + 5 }, 10);
+		return new AnimatedSprite(_spriteSheets["knight"], { _autoTiles["knight"][2].begin(), _autoTiles["knight"][2].begin() + 5 }, 10, Direction::RIGHT);
 	else if (id == "mario_walk")
 		return new AnimatedSprite(_spriteSheets["mario"], { _autoTiles["mario"][0].begin() + 2, _autoTiles["mario"][0].begin() + 5 }, 10);
 	else if (id == "mario_run")
@@ -96,7 +96,7 @@ Sprite* SpriteFactory::get(const std::string& id)
 	else if (id == "box")
 		return new AnimatedSprite(_spriteSheets["tiles"], { _autoTiles["tiles"][3].begin(), _autoTiles["tiles"][3].begin() + 3 }, 5, Direction::NONE, {0, 1, 2, 1, 0});
 	else if (id == "hud_coin")
-	{
+	 {
 		rects.push_back(moveBy(hud_coin, 0, 0));
 		rects.push_back(moveBy(hud_coin, 1, 0, 8, 8));
 		rects.push_back(moveBy(hud_coin, 2, 0, 8, 8));
