@@ -32,6 +32,7 @@ void MovableObject::defaultPhysics()
 	_xMoveForce = 8;		// 13 in running mode
 	_xFrictionForce = 11;
 	_xSkiddingForce = 93;
+	//prova
 }
 
 void MovableObject::velClip(float vx, float vy)
