@@ -30,10 +30,12 @@ class agp::RenderableObject : public Object
 		bool _visible;			// if false, does not draw
 		bool _focused;			// if true, fills with _focusColor color
 		SDL_RendererFlip _flip;	// horizontal/vertical flipping
-		float _angle;			// generic rotation (degrees/s, clockwise)
-		float _angularVelocity;	// generic rotation (degrees/s, clockwise)
+		float _angle;			// degrees, clockwise
+		float _angularVelocity;	// degrees/s, clockwise
 		Color _focusColor;
 		Color _borderColor;
+		float _borderThickness;	// in screen points
+		Color _backgroundColor;
 		const Color _rectColor = { 255, 0, 0, 255 };
 
 	public:
@@ -44,8 +46,14 @@ class agp::RenderableObject : public Object
 
 		// getters/setters
 		const Color& color() { return _color; }
+		const Color& backgroundColor() { return _backgroundColor; }
+		void setColor(const Color& newColor) { _color = newColor; }
+		void setBackgroundColor(const Color& newColor) { _backgroundColor = newColor; }
 		void setBorderColor(const Color& borderColor) { _borderColor = borderColor; }
-		void setVisible(bool visible) { _visible = visible; }
+		void setBorderThickness(float thickness) { _borderThickness = thickness; }
+		void setAngle(float newAngle) { _angle = newAngle; }
+		virtual void setVisible(bool visible) { _visible = visible; }
+		bool visible() { return _visible; }
 		Sprite* sprite() { return _sprite; }
 		virtual void setSprite(Sprite* sprite, bool deallocateSprite = false, bool resetOnChange = true);
 

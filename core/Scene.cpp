@@ -42,6 +42,7 @@ void Scene::newObject(Object* obj)
 void Scene::killObject(Object* obj)
 {
 	_deadObjects.insert(obj);
+	obj->_killed = true;
 }
 
 void Scene::changeLayerObject(Object* obj, int newLayer)
@@ -74,16 +75,26 @@ void Scene::refreshObjects()
 	}
 	_changeLayerObjects.clear();
 
-	for (auto& obj : _deadObjects)
+	for (auto it = _deadObjects.begin(); it != _deadObjects.end(); )
 	{
+		Object* obj = *it;
+
+		if (obj->_itersFromKilled < 2)
+		{
+			++it; // Move to the next element
+			continue;
+		}
+
 		auto& layer = _sortedObjects[obj->layer()];
 		auto removeIt = std::remove(layer.begin(), layer.end(), obj);
 		if (removeIt == layer.end())
 			std::cerr << "Cannot remove " << obj->name() << " from layer " << obj->layer() << ": object not found\n";
 		layer.erase(removeIt, layer.end());
+
+		// Erase the element from the set and advance the iterator safely
+		it = _deadObjects.erase(it); // 'erase' returns an iterator to the next element
 		delete obj;
 	}
-	_deadObjects.clear();
 }
 
 std::list<Object*> Scene::objects()
@@ -101,7 +112,7 @@ std::list<Object*> Scene::objects(const RectF& cullingRect)
 	std::list<Object*> objectsInRect;
 	for (auto& layer : _sortedObjects)
 		for (auto& obj : layer.second)
-			if (cullingRect.intersects(obj->rect()))
+			if (obj->intersectsRectShallow(cullingRect))
 				objectsInRect.push_back(obj);
 
 	return objectsInRect;
@@ -116,6 +127,32 @@ std::list<Object*> Scene::objects(const PointF& containPoint)
 				objectsSelected.push_back(obj);
 
 	return objectsSelected;
+}
+
+agp::Scene::ObjectsList Scene::raycast(const LineF& line)
+{
+	std::vector<std::pair<Object*, float>> hits;
+
+	auto objectsInRect = objects(line.boundingRect(_rect.yUp));
+	for (Object* obj : objectsInRect)
+	{
+		float tNear;
+		if (obj->intersectsLine(line, tNear))
+			hits.push_back({ obj, tNear });
+	}
+
+	// sort the hits based on the distance along the line (tNear):
+	std::sort(hits.begin(), hits.end(),
+		[](const std::pair<Object*, float>& a, const std::pair<Object*, float>& b) {
+			return a.second < b.second;
+		});
+
+	// extract the Object pointers from the sorted hits:
+	std::list<Object*> result;
+	for (const auto& hit : hits)
+		result.push_back(hit.first);
+
+	return result;
 }
 
 void Scene::render()

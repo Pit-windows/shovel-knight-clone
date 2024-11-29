@@ -9,12 +9,13 @@
 
 #pragma once
 #include "Scene.h"
+#include "graphicsUtils.h"
 
 namespace agp
 {
 	class GameScene;
 	class OverlayScene;
-	class Link;
+	class RenderableObject;
 }
 
 // GameScene (or World) class
@@ -34,10 +35,12 @@ class agp::GameScene : public Scene
 		Object* _player;
 		bool _collidersVisible;
 		bool _cameraManual;
+		bool _cameraFollowsPlayer;
 
 		// scene overlays
 		std::vector < OverlayScene*> _backgroundScenes;
 		std::vector < OverlayScene*> _foregroundScenes;
+		bool _displayGameSceneOnly;
 	
 		// camera controls
 		Vec2Df _cameraTranslateVel;
@@ -57,10 +60,12 @@ class agp::GameScene : public Scene
 		Object* player() { return _player; }
 		virtual void setPlayer(Object* player) { _player = player; }
 		bool collidersVisible() const { return _collidersVisible; }
-		void toggleColliders() { _collidersVisible = !_collidersVisible; }
-		void toggleCamera() { _cameraManual = !_cameraManual; }
-		void addBackgroundScene(OverlayScene* bgScene) { _backgroundScenes.push_back(bgScene); }
-		void addForegroundScene(OverlayScene* fgScene) { _foregroundScenes.push_back(fgScene); }
+		virtual void toggleColliders() { _collidersVisible = !_collidersVisible; }
+		virtual void toggleCameraManual() {	_cameraManual = !_cameraManual;	}
+		virtual void toggleCameraFollowsPlayer() { _cameraFollowsPlayer = !_cameraFollowsPlayer; }
+		virtual void addBackgroundScene(OverlayScene* bgScene) { _backgroundScenes.push_back(bgScene); }
+		virtual void addForegroundScene(OverlayScene* fgScene) { _foregroundScenes.push_back(fgScene); }
+		virtual void displayGameSceneOnly(bool on) { _displayGameSceneOnly = on; }
 
 		// overrides scene object selection (+octree or +BVH, NOT implemented)
 		//virtual std::list<Object*> objects(const RectF& cullingRect) override;

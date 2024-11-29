@@ -18,7 +18,7 @@
 
 using namespace agp;
 
-PlatformerGame::PlatformerGame() : Game("Platformer Game", { 600,600 }, 1.216f)
+PlatformerGame::PlatformerGame() : Game("Platformer Game", { 720,720 }, 25.0f/14)
 {
 	_hud = nullptr;
 }

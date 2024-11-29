@@ -31,55 +31,25 @@ Scene* LevelLoader::load(const std::string& name)
 
 	if (name == "overworld")
 	{
-		PlatformerGameScene* world = new PlatformerGameScene(RectF(0, -12, 224, 15), { 16,16 }, 1 / 100.0f);
-		world->setBackgroundColor(Color(96, 148, 252));
+		PlatformerGameScene* world = new PlatformerGameScene(RectF(0, 0, 427, 80), { 16,16 }, 1 / 100.0f);
+		world->setBackgroundColor(Color(92, 148, 252));
+		
+		new RenderableObject(world, RectF(0, 0, 427, 80), spriteLoader->get("overworld"));
+		new StaticObject(world, RectF(1, 51, 38, 1), nullptr, 1);
+		new StaticObject(world, RectF(39, 49, 4, 1), nullptr, 1);
+		new StaticObject(world, RectF(43, 37, 3, 1), nullptr, 1);
+		new StaticObject(world, RectF(46, 49, 4, 1), nullptr, 1);
+		new StaticObject(world, RectF(43, 47, 3, 1), nullptr, 1);
+		new StaticObject(world, RectF(50, 51, 14, 1), nullptr, 1);
+		new StaticObject(world, RectF(53, 47, 8, 1), nullptr, 1);
+		new StaticObject(world, RectF(64, 47, 1, 5), nullptr, 1);
+		new StaticObject(world, RectF(49, 50, 1, 2), nullptr, 1);
+		new StaticObject(world, RectF(45, 48, 1, 2), nullptr, 1);
+		new StaticObject(world, RectF(43, 48, 1, 2), nullptr, 1);
+		new StaticObject(world, RectF(39, 50, 1, 2), nullptr, 1);
 
-		// terrain
-		new StaticObject(world, RectF(0, 2, 68, 1),  spriteLoader->get("terrain"));
-		// boxes
-		new StaticObject(world, RectF(16, -3, 1, 1), spriteLoader->get("box"));
-		new StaticObject(world, RectF(21, -3, 1, 1), spriteLoader->get("box"));
-		new StaticObject(world, RectF(22, -7, 1, 1), spriteLoader->get("box"));
-		new StaticObject(world, RectF(23, -3, 1, 1), spriteLoader->get("box"));
-		// bricks
-		new StaticObject(world, RectF(20, -3, 1, 1), spriteLoader->get("brick"));
-		new StaticObject(world, RectF(22, -3, 1, 1), spriteLoader->get("brick"));
-		new StaticObject(world, RectF(24, -3, 1, 1), spriteLoader->get("brick"));
-		// pipes
-		new StaticObject(world, RectF(28, -1, 2, 4), spriteLoader->get("pipe3"), -1);
-		new StaticObject(world, RectF(38, -2, 2, 5), spriteLoader->get("pipe4"), -1);
-		new StaticObject(world, RectF(46, -3, 2, 6), spriteLoader->get("pipe5"), -1);
-		new StaticObject(world, RectF(57, -3, 2, 6), spriteLoader->get("pipe5"), -1);
-		new StaticObject(world, RectF(70, -3, 2, 11), spriteLoader->get("pipe10"), -1);
-		new StaticObject(world, RectF(74, -5, 2, 13), spriteLoader->get("pipe12"), -1);
-		new StaticObject(world, RectF(78, -7, 2, 15), spriteLoader->get("pipe14"), -1);
-
-		//new RenderableObject(world, RectF(0, -5, 30, 20), Color(0, 0, 0, 255), 2);
-
-		// hammer brother debug
-		/*for (int i = 0; i < 8; i++)
-		{
-			new StaticObject(world, RectF(7 + i, -3, 1, 1), spriteLoader->get("brick"));
-			new StaticObject(world, RectF(7 + i, -7, 1, 1), spriteLoader->get("brick"));
-		}*/
-		//new HammerBrother(world, PointF(21, 0));
-		//new HammerBrother(world, PointF(23, -4));
-
-		// lifts
-		Lift* lift1 = new Lift(world, RectF(7, -2, 3, 0.5f), spriteLoader->get("platform"), false, 10, 10);
-		Lift* lift2 = new Lift(world, RectF(4, -4, 3, 0.5f), spriteLoader->get("platform"), true, 3, 10);
-		lift1->toggleFreezed();
-		lift2->toggleFreezed();
-		// mario
-		Mario* mario = new Mario(world, PointF(2.5, 0));
-		world->setPlayer(mario);
-
-		// trigger example
-		new Trigger(world, RectF(1, -12, 0.5, 13), mario, [lift1, lift2]()
-			{
-				lift1->toggleFreezed();
-				lift2->toggleFreezed();
-			});
+		Mario* player = new Mario(world, PointF(8, 50));
+		world->setPlayer(player);
 
 		return world;
 	}

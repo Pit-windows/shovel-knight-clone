@@ -8,18 +8,37 @@
 #include "core_version.h"
 #include "version.h"
 
+#ifdef WITH_TTF
+#include "Fonts.h"
+#endif
+
 int main(int argc, char *argv[])
 {
-    printf("Proto-SimplePlatformer v%s\n", agp::SimplePlatformer::VERSION().c_str());
-    printf("Core v%s\n\n", agp::core::VERSION().c_str());
+	printf("Proto-SimplePlatformer v%s\n", agp::SimplePlatformer::VERSION().c_str());
+	printf("Core v%s\n\n", agp::core::VERSION().c_str());
 
-    agp::Game::setInstance(new agp::PlatformerGame());
-    agp::SpriteFactory::instance();
-    agp::LevelLoader::instance();
-    agp::Audio::instance();
+	try
+	{
+		agp::Game::setInstance(new agp::PlatformerGame());
+		agp::SpriteFactory::instance();
+		agp::LevelLoader::instance();
+		agp::Audio::instance();
 
-    agp::Game::instance()->init();
-    agp::Game::instance()->run();
+#ifdef WITH_TTF
+		agp::Fonts::instance();
+#endif
 
-    return EXIT_SUCCESS;
+		agp::Game::instance()->init();
+		agp::Game::instance()->run();
+	}
+	catch (const char* errMsg)
+	{
+		printf("ERROR: %s\n", errMsg);
+	}
+	catch (std::string errMsg)
+	{
+		printf("ERROR: %s\n", errMsg.c_str());
+	}
+
+	return EXIT_SUCCESS;
 }

@@ -13,6 +13,8 @@
 #include "Game.h"
 #include "Audio.h"
 #include "OverlayScene.h"
+#include "EditorScene.h"
+#include "EditorUI.h"
 
 using namespace agp;
 
@@ -26,6 +28,8 @@ GameScene::GameScene(const RectF& rect, const Point& pixelUnitSize, float dt)
 	_cameraTranslateVel = { 500, 500 };
 	_collidersVisible = false;
 	_cameraManual = false;
+	_cameraFollowsPlayer = true;
+	_displayGameSceneOnly = false;
 
 	_view = new View(this, _rect);
 	float ar = Game::instance()->aspectRatio();
@@ -37,13 +41,15 @@ void GameScene::render()
 {
 	if (_active)
 	{
-		for (auto& bgScene : _backgroundScenes)
-			bgScene->render();
+		if (!_displayGameSceneOnly)
+			for (auto& bgScene : _backgroundScenes)
+				bgScene->render();
 
 		_view->render();
 
-		for (auto& fgScene : _foregroundScenes)
-			fgScene->render();
+		if(!_displayGameSceneOnly)
+			for (auto& fgScene : _foregroundScenes)
+				fgScene->render();
 	}
 }
 
@@ -107,10 +113,10 @@ void GameScene::updateCamera(float timeToSimulate)
 
 	if (_cameraManual)
 	{
-		_view->move((_cameraTranslateVel / _view->magf()) * dir2vec(xDir) * timeToSimulate);
-		_view->move((_cameraTranslateVel / _view->magf()) * dir2vec(yDir) * timeToSimulate);
+		_view->move((_cameraTranslateVel / _view->magf()) * dir2vec(xDir, _rect.yUp) * timeToSimulate);
+		_view->move((_cameraTranslateVel / _view->magf()) * dir2vec(yDir, _rect.yUp) * timeToSimulate);
 	}
-	else
+	else if(_cameraFollowsPlayer)
 	{
 		_view->setX(_player->rect().pos.x - _view->rect().size.x / 2);
 		_view->setY(_player->rect().pos.y - _view->rect().size.y / 2);
@@ -121,17 +127,36 @@ void GameScene::event(SDL_Event& evt)
 {
 	Scene::event(evt);
 
+	// window resize events may affect overlay scenes
+	if (evt.type == SDL_WINDOWEVENT)
+	{
+		for (auto& bgScene : _backgroundScenes)
+			bgScene->event(evt);
+		for (auto& fgScene : _foregroundScenes)
+			fgScene->event(evt);
+	}
+
+	// visual controls
 	if (evt.type == SDL_KEYDOWN && evt.key.keysym.scancode == SDL_SCANCODE_C && !evt.key.repeat)
 		toggleColliders();
 	else if (evt.type == SDL_KEYDOWN && evt.key.keysym.scancode == SDL_SCANCODE_R && !evt.key.repeat)
 		toggleRects();
 	else if (evt.type == SDL_KEYDOWN && evt.key.keysym.scancode == SDL_SCANCODE_M && !evt.key.repeat)
-		toggleCamera();
-	else if (evt.type == SDL_MOUSEWHEEL)
+		toggleCameraManual();
+	else if (evt.type == SDL_MOUSEWHEEL && _cameraManual)
 	{
 		if (evt.wheel.y > 0)
 			_view->scale(1 - _cameraZoomVel);
 		else if (evt.wheel.y < 0)
 			_view->scale(1 + _cameraZoomVel);
+	}
+
+	// open editor
+	else if (evt.type == SDL_KEYDOWN && evt.key.keysym.scancode == SDL_SCANCODE_E && !evt.key.repeat)
+	{
+		EditorUI* editorUI = new EditorUI();
+		EditorScene* editorScene = new EditorScene(this, editorUI);
+		Game::instance()->pushScene(editorScene);
+		Game::instance()->pushScene(editorUI);
 	}
 }

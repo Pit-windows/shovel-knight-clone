@@ -40,7 +40,7 @@ class agp::Scene
 
 	protected:
 		
-		ObjectsMap  _sortedObjects;	// objects sorted by ascending z-level
+		ObjectsMap _sortedObjects;	// objects sorted by ascending z-level
 		ObjectsSet _newObjects;		// new objects that need to be added
 		ObjectsSet _deadObjects;	// dead objects that need to be deallocated
 		ObjectsLayersList _changeLayerObjects;	// objects that need to change layer
@@ -82,10 +82,11 @@ class agp::Scene
 		void changeLayerObject(Object* obj, int newLayer);
 		void refreshObjects();
 
-		// objects selection methods
+		// geometric queries
 		virtual ObjectsList objects();
 		virtual ObjectsList objects(const RectF& cullingRect);
 		virtual ObjectsList objects(const PointF& containPoint);
+		virtual ObjectsList raycast(const LineF& line);
 
 		// render
 		virtual void render();

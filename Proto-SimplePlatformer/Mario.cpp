@@ -18,9 +18,9 @@
 using namespace agp;
 
 Mario::Mario(Scene* scene, const PointF& pos)
-	: DynamicObject(scene, RectF( pos.x + 1 / 16.0f, pos.y, 2, 2 ), nullptr)
+	: DynamicObject(scene, RectF( pos.x + 1 / 16.0f, pos.y, 1, 1 ), nullptr)
 {
-	//_collider.adjust(0.2f, 0, -0.2f, -1/16.0f);
+	_collider.adjust(0.2f, 0, -0.2f, -1/16.0f);
 
 	_walking = false;
 	_jumping = false;
@@ -33,10 +33,10 @@ Mario::Mario(Scene* scene, const PointF& pos)
 
 	_xLastNonZeroVel = 0;
 
-	_sprites["stand"] = SpriteFactory::instance()->get("knight_stand");
-	_sprites["walk"] = SpriteFactory::instance()->get("knight_walk");
+	_sprites["stand"] = SpriteFactory::instance()->get("mario_stand");
+	_sprites["walk"] = SpriteFactory::instance()->get("mario_walk");
 	_sprites["run"] = SpriteFactory::instance()->get("mario_run");
-	_sprites["skid"] = SpriteFactory::instance()->get("knight_skid");
+	_sprites["skid"] = SpriteFactory::instance()->get("mario_skid");
 	_sprites["jump"] = SpriteFactory::instance()->get("mario_jump");
 	_sprites["die"] = SpriteFactory::instance()->get("mario_die");
 	_sprites["attack"] = SpriteFactory::instance()->get("mario_attack");

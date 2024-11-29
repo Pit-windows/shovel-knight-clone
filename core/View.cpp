@@ -36,6 +36,12 @@ void View::setScene(Scene* scene)
 	_rect = scene->rect();
 }
 
+void View::setRect(const RectF& r)
+{ 
+	_rect = r; 
+	updateViewport(); 
+}
+
 void View::move(const Vec2Df& ds)
 {
 	_rect.pos += ds;
@@ -138,7 +144,7 @@ void View::updateViewport()
 			if (_rect.yUp)
 				return PointF(
 					_viewportAbs.pos.x + (p.x - _rect.pos.x) * _magf.x,
-					_viewportAbs.pos.y - (p.y - _rect.size.y) * _magf.y);
+					_viewportAbs.pos.y - (p.y - _rect.pos.y - _rect.size.y) * _magf.y);
 			else
 				return PointF(
 					_viewportAbs.pos.x + (p.x - _rect.pos.x) * _magf.x,
@@ -150,7 +156,7 @@ void View::updateViewport()
 			if (_rect.yUp)
 				return PointF(
 					(p.x - _viewportAbs.pos.x) / _magf.x + _rect.pos.x,
-					-(p.y - _viewportAbs.pos.y) / _magf.y + _rect.size.y);
+					-(p.y - _viewportAbs.pos.y) / _magf.y + _rect.pos.y + _rect.size.y);
 			else
 				return PointF(
 					(p.x - _viewportAbs.pos.x) / _magf.x + _rect.pos.x,
