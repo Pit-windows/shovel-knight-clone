@@ -34,6 +34,7 @@ SpriteFactory::SpriteFactory()
 	_spriteSheets["hud"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/hud.png", { 147, 187, 236 });
 	_spriteSheets["tiles"] = loadTextureAutoDetect(renderer, std::string(SDL_GetBasePath()) + "sprites/stage_tiles.png", _autoTiles["tiles"], { 27, 89, 153 }, { 147, 187, 236 }, 5, true, false);
 	_spriteSheets["overworld"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/overworld.png");
+	_spriteSheets["knight"] = loadTextureAutoDetect(renderer, std::string(SDL_GetBasePath()) + "sprites/knight.png", _autoTiles["knight"], { 0, 128, 128 }, { 0, 255, 0 }, 5, true, false, true);
 }
 
 // anchors
@@ -53,24 +54,16 @@ Sprite* SpriteFactory::get(const std::string& id)
 
 
 	// single-frame sprites
-	else if (id == "terrain")
-		return new FilledSprite(_spriteSheets["tiles"], _autoTiles["tiles"][7][0]);
-	else if (id == "brick")
-		return new Sprite(_spriteSheets["tiles"], _autoTiles["tiles"][5][1]);
-	else if (id == "wall")
-		return new Sprite(_spriteSheets["tiles"], _autoTiles["tiles"][5][2]);
-	else if (id == "block")
-		return new Sprite(_spriteSheets["tiles"], _autoTiles["tiles"][3][5]);
 	else if (id == "welcome")
 		return new Sprite(_spriteSheets["hud"], RectI(1, 2 + 16 * 2, 16 * 16, 13 * 16));
 	else if (id == "gameover")
 		return new Sprite(_spriteSheets["hud"], RectI(260, 253, 16 * 16, 15 * 16));
-	else if (id == "mario_stand")
-		return new Sprite(_spriteSheets["mario"], _autoTiles["mario"][0][0]);
-	else if (id == "mario_jump")
-		return new Sprite(_spriteSheets["mario"], _autoTiles["mario"][0][6]);
-	else if (id == "mario_skid")
-		return new Sprite(_spriteSheets["mario"], _autoTiles["mario"][0][5]);
+	else if (id == "knight_stand")
+		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][0][0]);
+	else if (id == "knight_jump")
+		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][5][0], Direction::UP);
+	else if (id == "knight_skid")
+		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][4][0], Direction::RIGHT);
 	else if (id == "mario_die")
 		return new Sprite(_spriteSheets["mario"], _autoTiles["mario"][0][1]);
 	else if (id == "mario_attack")
@@ -83,8 +76,8 @@ Sprite* SpriteFactory::get(const std::string& id)
 		return new FilledSprite(_spriteSheets["tiles"], _autoTiles["tiles"][8][33]);
 
 	// animated sprites
-	else if (id == "mario_walk")
-		return new AnimatedSprite(_spriteSheets["mario"], { _autoTiles["mario"][0].begin() + 2, _autoTiles["mario"][0].begin() + 5 }, 10);
+	else if (id == "knight_walk")
+		return new AnimatedSprite(_spriteSheets["knight"], { _autoTiles["knight"][3].begin(), _autoTiles["knight"][3].begin() + 5 }, 10, Direction::UP);
 	else if (id == "mario_run")
 		return new AnimatedSprite(_spriteSheets["mario"], { _autoTiles["mario"][0].begin() + 2, _autoTiles["mario"][0].begin() + 5 }, 20);
 	else if (id == "box")

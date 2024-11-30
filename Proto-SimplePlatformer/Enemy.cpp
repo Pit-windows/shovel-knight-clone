@@ -1,5 +1,5 @@
 #include "Enemy.h"
-#include "Mario.h"
+#include "Knight.h"
 #include "Audio.h"
 #include "Scene.h"
 
@@ -15,14 +15,14 @@ Enemy::Enemy(Scene* scene, const RectF& rect, Sprite* sprite, int layer)
 
 bool Enemy::collision(CollidableObject* with, Direction fromDir)
 {
-	Mario* mario = dynamic_cast<Mario*>(with);
+	Knight* knight = dynamic_cast<Knight*>(with);
 
-	if (mario)
+	if (knight)
 	{
-		if (_smashable && mario->invincible())
+		if (_smashable && knight->invincible())
 			smash();
 		else
-			mario->hurt();
+			knight->hurt();
 
 		return true;
 	}

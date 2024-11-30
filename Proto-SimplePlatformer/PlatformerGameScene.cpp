@@ -9,7 +9,7 @@
 
 #include "PlatformerGameScene.h"
 #include "View.h"
-#include "Mario.h"
+#include "Knight.h"
 #include "Menu.h"
 #include "Game.h"
 #include "timeUtils.h"
@@ -30,7 +30,7 @@ void PlatformerGameScene::updateControls(float timeToSimulate)
 	if (_cameraManual)
 		return;
 
-	Mario* mario = dynamic_cast<Mario*>(_player);
+	Knight* mario = dynamic_cast<Knight*>(_player);
 	const Uint8* keyboard = SDL_GetKeyboardState(0);
 
 	if (keyboard[SDL_SCANCODE_RIGHT] && !keyboard[SDL_SCANCODE_LEFT])
@@ -54,7 +54,7 @@ void PlatformerGameScene::updateCamera(float timeToSimulate)
 		return;
 	}
 
-	Mario* mario = dynamic_cast<Mario*>(_player);
+	Knight* mario = dynamic_cast<Knight*>(_player);
 	_view->setX(std::max(_view->rect().pos.x, mario->rect().pos.x - 7));
 }
 
@@ -62,7 +62,7 @@ void PlatformerGameScene::event(SDL_Event& evt)
 {
 	GameScene::event(evt);
 
-	Mario* mario = dynamic_cast<Mario*>(_player);
+	Knight* mario = dynamic_cast<Knight*>(_player);
 
 	if (evt.type == SDL_KEYDOWN && (evt.key.keysym.scancode == SDL_SCANCODE_RETURN || evt.key.keysym.scancode == SDL_SCANCODE_ESCAPE))
 		Game::instance()->pushScene(Menu::pauseMenu());

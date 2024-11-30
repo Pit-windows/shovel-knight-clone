@@ -12,7 +12,7 @@
 #include "RenderableObject.h"
 #include "StaticObject.h"
 #include "PlatformerGameScene.h"
-#include "Mario.h"
+#include "Knight.h"
 #include "HammerBrother.h"
 #include "Lift.h"
 #include "Trigger.h"
@@ -31,7 +31,7 @@ LevelLoader::LevelLoader()
 void LevelLoader::loadJson(
 	PlatformerGameScene* world,
 	const std::string& jsonPath,
-	Mario* link)
+	Knight* link)
 {
 	std::ifstream f(jsonPath);
 	if (!f.is_open())
@@ -117,7 +117,7 @@ Scene* LevelLoader::load(const std::string& name)
 		
 		new RenderableObject(world, RectF(0, 0, 427, 80), spriteLoader->get("overworld"));
 
-		Mario* player = new Mario(world, PointF(8, 50));
+		Knight* player = new Knight(world, PointF(7, 49));
 		world->setPlayer(player);
 
 		// Caricamento oggetti dal file json generato dal level editor
