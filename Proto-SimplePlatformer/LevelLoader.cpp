@@ -17,12 +17,93 @@
 #include "Lift.h"
 #include "Trigger.h"
 #include <iostream>
+#include <fstream>
+#include "json.hpp"
+#include "mathUtils.h"
 
 using namespace agp;
 
 LevelLoader::LevelLoader()
 {
 	// e.g. load level data from disk
+}
+
+void LevelLoader::loadJson(
+	PlatformerGameScene* world,
+	const std::string& jsonPath,
+	Mario* link)
+{
+	std::ifstream f(jsonPath);
+	if (!f.is_open())
+		return;
+
+	nlohmann::json jRoot = nlohmann::json::parse(f);
+	std::vector <std::string> _categories = jRoot["categories"].get<std::vector<std::string>>();
+	std::vector<nlohmann::json> jsonObjects = jRoot["objects"].get<std::vector<nlohmann::json>>();
+
+	// portals with matching names = portals to be connected
+	//std::map<std::string, std::vector<Portal*>> portals;
+
+	for (auto& jObj : jsonObjects)
+	{
+		int category = jObj["category"];
+		std::string name = jObj["name"];
+
+		if (jObj.contains("rect") || jObj.contains("rotRect"))
+		{
+			RotatedRectF rrect;
+
+			if (jObj.contains("rect"))
+			{
+				RectF rect;
+				rect.pos.x = jObj["rect"]["x"];
+				rect.pos.y = jObj["rect"]["y"];
+				rect.size.x = jObj["rect"]["width"];
+				rect.size.y = jObj["rect"]["height"];
+				rect.yUp = jObj["rect"]["yUp"];
+				rrect = rect;
+			}
+			else
+			{
+				rrect.center.x = jObj["rotRect"]["cx"];
+				rrect.center.y = jObj["rotRect"]["cy"];
+				rrect.size.x = jObj["rotRect"]["width"];
+				rrect.size.y = jObj["rotRect"]["height"];
+				rrect.angle = deg2rad(float(jObj["rotRect"]["angle"]));
+				rrect.yUp = jObj["rotRect"]["yUp"];
+			}
+
+			if (_categories[category] == "Terrain")
+				new StaticObject(world, rrect, nullptr, 1);
+			//else if (_categories[category] == "Portal")
+				//portals[name].push_back(new Portal(world, rrect));
+		}
+		else if (jObj.contains("multiline"))
+		{
+			std::vector<nlohmann::json> jsonPoints = jObj["multiline"].get<std::vector<nlohmann::json>>();
+			for (int i = 0; i < jsonPoints.size() - 1; i++)
+			{
+				float x1 = jsonPoints[i]["x"];
+				float y1 = jsonPoints[i]["y"];
+				float x2 = jsonPoints[i + 1]["x"];
+				float y2 = jsonPoints[i + 1]["y"];
+				LineF line(x1, y1, x2, y2);
+				new StaticObject(world, RotatedRectF(line, 0.1f, false), nullptr, 2);
+			}
+		}
+	}
+
+	// connect paired portals
+	/*for (auto& pair : portals)
+		if (pair.second.size() == 2)
+		{
+			pair.second[0]->setDestination(pair.second[1]);
+			pair.second[1]->setDestination(pair.second[0]);
+		}
+		else
+			std::cerr << "Found " << pair.second.size() << " portals with name " << pair.first << ": expected 2\n";*/
+
+	f.close();
 }
 
 Scene* LevelLoader::load(const std::string& name)
@@ -35,21 +116,12 @@ Scene* LevelLoader::load(const std::string& name)
 		world->setBackgroundColor(Color(92, 148, 252));
 		
 		new RenderableObject(world, RectF(0, 0, 427, 80), spriteLoader->get("overworld"));
-		new StaticObject(world, RectF(1, 51, 38, 1), nullptr, 1);
-		new StaticObject(world, RectF(39, 49, 4, 1), nullptr, 1);
-		new StaticObject(world, RectF(43, 37, 3, 1), nullptr, 1);
-		new StaticObject(world, RectF(46, 49, 4, 1), nullptr, 1);
-		new StaticObject(world, RectF(43, 47, 3, 1), nullptr, 1);
-		new StaticObject(world, RectF(50, 51, 14, 1), nullptr, 1);
-		new StaticObject(world, RectF(53, 47, 8, 1), nullptr, 1);
-		new StaticObject(world, RectF(64, 47, 1, 5), nullptr, 1);
-		new StaticObject(world, RectF(49, 50, 1, 2), nullptr, 1);
-		new StaticObject(world, RectF(45, 48, 1, 2), nullptr, 1);
-		new StaticObject(world, RectF(43, 48, 1, 2), nullptr, 1);
-		new StaticObject(world, RectF(39, 50, 1, 2), nullptr, 1);
 
 		Mario* player = new Mario(world, PointF(8, 50));
 		world->setPlayer(player);
+
+		// Caricamento oggetti dal file json generato dal level editor
+		loadJson(world, std::string(SDL_GetBasePath()) + "EditorScene.json", player);
 
 		return world;
 	}

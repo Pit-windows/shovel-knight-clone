@@ -14,8 +14,10 @@
 
 namespace agp
 {
+	class PlatformerGameScene;
 	class Scene;
 	class LevelLoader;
+	class Mario;
 }
 
 // LevelLoader (singleton)
@@ -28,6 +30,11 @@ class agp::LevelLoader : public Singleton<LevelLoader>
 
 		// constructor accessible only to Singleton (thanks to friend declaration)
 		LevelLoader();
+
+		void loadJson(
+			PlatformerGameScene* world,
+			const std::string& jsonPath,
+			Mario* link);
 
 	public:
 

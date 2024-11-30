@@ -12,7 +12,7 @@
 
 using namespace agp;
 
-StaticObject::StaticObject(Scene* scene, const RectF& rect, Sprite* sprite, int layer) :
+StaticObject::StaticObject(Scene* scene, const RotatedRectF& rect, Sprite* sprite, int layer) :
 	CollidableObject(scene, rect, sprite, layer)
 {	
 

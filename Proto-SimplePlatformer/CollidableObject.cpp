@@ -17,8 +17,8 @@
 
 using namespace agp;
 
-CollidableObject::CollidableObject(Scene* scene, const RectF& rect, Sprite* sprite, int layer) :
-	MovableObject(scene, rect, sprite, layer)
+CollidableObject::CollidableObject(Scene* scene, const RotatedRectF& rect, Sprite* sprite, int layer) :
+	MovableObject(scene, rect.toRect(), sprite, layer)
 {
 	// default collider: object rect
 	_collider = { 0, 0, _rect.size.x, _rect.size.y };

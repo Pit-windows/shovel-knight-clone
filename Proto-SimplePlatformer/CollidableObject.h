@@ -45,7 +45,7 @@ class agp::CollidableObject : public MovableObject
 
 	public:
 
-		CollidableObject(Scene* scene, const RectF& rect, Sprite* sprite, int layer = 0);
+		CollidableObject(Scene* scene, const RotatedRectF& rect, Sprite* sprite, int layer = 0);
 		virtual ~CollidableObject() {}
 
 		// getters/setters
