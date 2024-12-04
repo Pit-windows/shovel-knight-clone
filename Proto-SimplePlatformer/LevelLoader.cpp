@@ -20,6 +20,7 @@
 #include <fstream>
 #include "json.hpp"
 #include "mathUtils.h"
+#include "OverlayScene.h"
 
 using namespace agp;
 
@@ -113,7 +114,6 @@ Scene* LevelLoader::load(const std::string& name)
 	if (name == "overworld")
 	{
 		PlatformerGameScene* world = new PlatformerGameScene(RectF(0, 0, 427, 80), { 16,16 }, 1 / 100.0f);
-		world->setBackgroundColor(Color(92, 148, 252));
 		
 		new RenderableObject(world, RectF(0, 0, 427, 80), spriteLoader->get("overworld"));
 
@@ -122,6 +122,13 @@ Scene* LevelLoader::load(const std::string& name)
 
 		// Caricamento oggetti dal file json generato dal level editor
 		loadJson(world, std::string(SDL_GetBasePath()) + "EditorScene.json", player);
+
+
+		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("sky_bg")));
+		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("castle_bg"), { 0.2f, 1 }));
+		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("trees1_bg"), { 0.4f, 1 }));
+		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("trees2_bg"), { 1.2f, 1 }));
+
 
 		return world;
 	}
