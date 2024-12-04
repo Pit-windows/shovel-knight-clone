@@ -125,9 +125,9 @@ Scene* LevelLoader::load(const std::string& name)
 
 
 		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("sky_bg")));
-		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("castle_bg"), { 0.2f, 1 }));
-		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("trees1_bg"), { 0.4f, 1 }));
-		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("trees2_bg"), { 1.2f, 1 }));
+		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("castle_bg")));
+		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("trees1_bg")));
+		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("trees2_bg")));
 
 
 		return world;
