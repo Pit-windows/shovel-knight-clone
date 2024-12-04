@@ -20,7 +20,7 @@ Knight::Knight(Scene* scene, const PointF& pos)
 	: DynamicObject(scene, RectF(pos.x + 1 / 16.0f, pos.y, 2, 2), nullptr)
 {
 	_collider.adjust(0.2f, 0, -0.2f, -1 / 16.0f);
-
+	_fit = false;
 	_walking = false;
 	_jumping = false;
 	_dying = false;

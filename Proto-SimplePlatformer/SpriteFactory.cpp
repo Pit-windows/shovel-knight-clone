@@ -61,9 +61,9 @@ Sprite* SpriteFactory::get(const std::string& id)
 	else if (id == "knight_stand")
 		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][0][0]);
 	else if (id == "knight_jump")
-		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][5][0], Direction::UP);
+		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][5][0]);
 	else if (id == "knight_skid")
-		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][4][0], Direction::RIGHT);
+		return new Sprite(_spriteSheets["knight"], _autoTiles["knight"][4][0]);
 	else if (id == "mario_die")
 		return new Sprite(_spriteSheets["mario"], _autoTiles["mario"][0][1]);
 	else if (id == "mario_attack")
@@ -77,11 +77,11 @@ Sprite* SpriteFactory::get(const std::string& id)
 
 	// animated sprites
 	else if (id == "knight_walk")
-		return new AnimatedSprite(_spriteSheets["knight"], { _autoTiles["knight"][3].begin(), _autoTiles["knight"][3].begin() + 5 }, 10, Direction::UP);
+		return new AnimatedSprite(_spriteSheets["knight"], { _autoTiles["knight"][3].begin(), _autoTiles["knight"][3].begin() + 5 }, 10);
 	else if (id == "mario_run")
 		return new AnimatedSprite(_spriteSheets["mario"], { _autoTiles["mario"][0].begin() + 2, _autoTiles["mario"][0].begin() + 5 }, 20);
 	else if (id == "box")
-		return new AnimatedSprite(_spriteSheets["tiles"], { _autoTiles["tiles"][3].begin(), _autoTiles["tiles"][3].begin() + 3 }, 5, Direction::NONE, {0, 1, 2, 1, 0});
+		return new AnimatedSprite(_spriteSheets["tiles"], { _autoTiles["tiles"][3].begin(), _autoTiles["tiles"][3].begin() + 3 }, 5, {0, 1, 2, 1, 0});
 	else if (id == "hud_coin")
 	{
 		rects.push_back(moveBy(hud_coin, 0, 0));
@@ -97,7 +97,7 @@ Sprite* SpriteFactory::get(const std::string& id)
 	else if (id == "hammer_brother_throw")
 		return new AnimatedSprite(_spriteSheets["enemies"], { _autoTiles["enemies"][0].begin() + 23, _autoTiles["enemies"][0].begin() + 25 }, 8);
 	else if (id == "link_sword")
-		return new AnimatedSprite(_spriteSheets["link"], { _autoTiles["link"][9].begin(), _autoTiles["link"][9].begin() + 9 }, 22, Direction::NONE, { 0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 8 }, 1);
+		return new AnimatedSprite(_spriteSheets["link"], { _autoTiles["link"][9].begin(), _autoTiles["link"][9].begin() + 9 }, 22, { 0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 8 }, 1);
 
 	// tiled sprites
 	if (id.compare(0, 4, "pipe") == 0)
