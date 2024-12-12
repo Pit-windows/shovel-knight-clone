@@ -30,9 +30,9 @@ SpriteFactory::SpriteFactory()
 
 	SDL_Renderer* renderer = Game::instance()->window()->renderer();
 	_spriteSheets["sky_bg"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/sky_bg.png");
-	_spriteSheets["castle_bg"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/castle_bg.png");
-	_spriteSheets["trees1_bg"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/trees1_bg.png");
-	_spriteSheets["trees2_bg"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/trees2_bg.png");
+	_spriteSheets["castle_bg"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/castle_prova.png");
+	_spriteSheets["trees1_bg"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/trees1_prova.png");
+	_spriteSheets["trees2_bg"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/trees2_prova.png");
 	_spriteSheets["mario"] = loadTextureAutoDetect(renderer, std::string(SDL_GetBasePath()) + "sprites/mario.png", _autoTiles["mario"], {27, 89, 153}, { 147, 187, 236 });
 	_spriteSheets["enemies"] = loadTextureAutoDetect(renderer, std::string(SDL_GetBasePath()) + "sprites/enemies.png", _autoTiles["enemies"], { 27, 89, 153 }, { 147, 187, 236 }, 17);
 	_spriteSheets["hud"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/hud.png", { 147, 187, 236 });
@@ -60,11 +60,11 @@ Sprite* SpriteFactory::get(const std::string& id)
 	else if (id == "sky_bg")
 		return new Sprite(_spriteSheets["sky_bg"]);
 	else if (id == "castle_bg")
-		return new Sprite(_spriteSheets["castle_bg"]);
+		return new FilledSprite(_spriteSheets["castle_bg"]);
 	else if (id == "trees1_bg")
-		return new Sprite(_spriteSheets["trees1_bg"]);
+		return new FilledSprite(_spriteSheets["trees1_bg"]);
 	else if (id == "trees2_bg")
-		return new Sprite(_spriteSheets["trees2_bg"]);
+		return new FilledSprite(_spriteSheets["trees2_bg"]);
 
 
 	// single-frame sprites

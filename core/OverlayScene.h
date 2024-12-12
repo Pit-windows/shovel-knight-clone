@@ -35,7 +35,9 @@ class agp::OverlayScene : public Scene
 			GameScene* gameScene,
 			Sprite* bgSprite,
 			const Vec2Df& parallaxVel = Vec2Df(),
-			bool seamless = false);		// if true, bgSprite must be a FilledSprite (repeats itself as needed)
+			bool seamless = false,
+			PointF pixelUnitSize={16,16},
+			PointF offset={0,0});		// if true, bgSprite must be a FilledSprite (repeats itself as needed)
 		virtual ~OverlayScene() {};
 
 		// implements parallax logic

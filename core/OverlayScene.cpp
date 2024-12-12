@@ -15,9 +15,10 @@
 
 using namespace agp;
 
-OverlayScene::OverlayScene(GameScene* gameScene, Sprite* bgSprite, const Vec2Df& parallaxVel, bool seamless)
+OverlayScene::OverlayScene(GameScene* gameScene, Sprite* bgSprite, const Vec2Df& parallaxVel, bool seamless, PointF pixelUnitSize, PointF offset)
 	: Scene(gameScene->rect(), gameScene->pixelUnitSize())
 {
+	_pixelUnitSize = pixelUnitSize;
 	_gameScene = gameScene;
 	_parallaxVel = parallaxVel;
 	_seamless = seamless;
@@ -31,7 +32,7 @@ OverlayScene::OverlayScene(GameScene* gameScene, Sprite* bgSprite, const Vec2Df&
 		foreground_rect = gameScene->rect() * _parallaxVel;
 		foreground_rect.adjust(0, 0, view()->rect().size.x, 0);
 	}
-	_foreground = new RenderableObject(this, foreground_rect, bgSprite);
+	_foreground = new RenderableObject(this, foreground_rect + offset, bgSprite);
 }
 
 // implements parallax logic

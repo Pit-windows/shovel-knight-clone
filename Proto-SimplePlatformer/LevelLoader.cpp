@@ -124,10 +124,10 @@ Scene* LevelLoader::load(const std::string& name)
 		loadJson(world, std::string(SDL_GetBasePath()) + "EditorScene.json", player);
 
 
-		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("sky_bg")));
-		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("castle_bg")));
-		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("trees1_bg")));
-		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("trees2_bg")));
+		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("sky_bg"), { 0,0 }, false, { 16,16 }, { 0,1 }));
+		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("castle_bg"), { 0.2f, 1 }, true, { 32,32 }, { -15,-2 }));
+		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("trees1_bg"), { 0.4f, 1 }, true, { 32,32 }, { 0,-2 }));
+		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("trees2_bg"), { 0.6f, 1 }, true, { 32,32 }, {0,-2}));
 
 
 		return world;
