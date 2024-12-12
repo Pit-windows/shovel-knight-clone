@@ -76,8 +76,8 @@ void LevelLoader::loadJson(
 
 			if (_categories[category] == "Terrain")
 				new StaticObject(world, rrect, nullptr, 1);
-			//else if (_categories[category] == "Portal")
-				//portals[name].push_back(new Portal(world, rrect));
+			else if (_categories[category] == "Breakable")
+				new StaticObject(world, rrect, nullptr, 1);
 		}
 		else if (jObj.contains("multiline"))
 		{
