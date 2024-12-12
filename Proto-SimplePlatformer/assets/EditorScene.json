@@ -1,0 +1,209 @@
+{
+   "core_version": "2.9.0",
+   "categories": [
+      "Terrain",
+      "Breakable",
+      "Category 2",
+      "Category 3",
+      "Category 4",
+      "Category 5",
+      "Category 6",
+      "Category 7",
+      "Category 8",
+      "Category 9",
+      "Category 10",
+      "Category 11",
+      "Category 12",
+      "Category 13",
+      "Category 14"
+   ],
+   "objects": [
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 1.0,
+            "y": 51.0,
+            "width": 38.0,
+            "height": 1.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 39.0,
+            "y": 49.0,
+            "width": 4.0,
+            "height": 1.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 43.0,
+            "y": 47.0,
+            "width": 3.0,
+            "height": 1.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 46.0,
+            "y": 49.0,
+            "width": 4.0,
+            "height": 1.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 45.0,
+            "y": 48.0,
+            "width": 1.0,
+            "height": 2.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 43.0,
+            "y": 48.0,
+            "width": 1.0,
+            "height": 2.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 39.0,
+            "y": 50.0,
+            "width": 1.0,
+            "height": 2.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 49.0,
+            "y": 50.0,
+            "width": 1.0,
+            "height": 2.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 50.0,
+            "y": 51.0,
+            "width": 14.0,
+            "height": 1.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 64.0,
+            "y": 47.0,
+            "width": 3.0,
+            "height": 1.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 64.0,
+            "y": 48.0,
+            "width": 1.0,
+            "height": 4.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 0,
+         "name": "",
+         "rect": {
+            "x": 53.0,
+            "y": 47.0,
+            "width": 8.0,
+            "height": 1.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 1,
+         "name": "",
+         "rect": {
+            "x": 57.0,
+            "y": 45.0,
+            "width": 2.0,
+            "height": 2.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 1,
+         "name": "",
+         "rect": {
+            "x": 74.0,
+            "y": 44.0,
+            "width": 2.0,
+            "height": 2.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 1,
+         "name": "",
+         "rect": {
+            "x": 97.0,
+            "y": 43.0,
+            "width": 2.0,
+            "height": 2.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 1,
+         "name": "",
+         "rect": {
+            "x": 97.0,
+            "y": 45.0,
+            "width": 2.0,
+            "height": 2.0,
+            "yUp": false
+         }
+      },
+      {
+         "category": 1,
+         "name": "",
+         "rect": {
+            "x": 97.0,
+            "y": 47.0,
+            "width": 2.0,
+            "height": 2.0,
+            "yUp": false
+         }
+      }
+   ]
+}
