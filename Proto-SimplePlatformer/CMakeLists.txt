@@ -24,3 +24,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../core)
 # create exe and link
 add_executable(${project_name} ${sources})
 target_link_libraries(${project_name} SDL2::SDL2main SDL2::SDL2 SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer agpcore)
+
+# Add a post-build command to copy the contents of "assets"
+add_custom_command(
+    TARGET ${project_name} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/assets/ $<TARGET_FILE_DIR:${project_name}>
+    COMMENT "Copia del contenuto della cartella assets nella directory di output (Debug/Release)"
+)
