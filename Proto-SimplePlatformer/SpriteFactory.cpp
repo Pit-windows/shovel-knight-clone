@@ -29,16 +29,16 @@ SpriteFactory::SpriteFactory()
 	}
 
 	SDL_Renderer* renderer = Game::instance()->window()->renderer();
-	_spriteSheets["sky_bg"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/sky_bg.png");
-	_spriteSheets["castle_bg"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/castle_prova.png");
-	_spriteSheets["trees1_bg"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/trees1_prova.png");
-	_spriteSheets["trees2_bg"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/trees2_prova.png");
-	_spriteSheets["mario"] = loadTextureAutoDetect(renderer, std::string(SDL_GetBasePath()) + "sprites/mario.png", _autoTiles["mario"], {27, 89, 153}, { 147, 187, 236 });
-	_spriteSheets["enemies"] = loadTextureAutoDetect(renderer, std::string(SDL_GetBasePath()) + "sprites/enemies.png", _autoTiles["enemies"], { 27, 89, 153 }, { 147, 187, 236 }, 17);
-	_spriteSheets["hud"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/hud.png", { 147, 187, 236 });
-	_spriteSheets["tiles"] = loadTextureAutoDetect(renderer, std::string(SDL_GetBasePath()) + "sprites/stage_tiles.png", _autoTiles["tiles"], { 27, 89, 153 }, { 147, 187, 236 }, 5, true, false);
-	_spriteSheets["overworld"] = loadTexture(renderer, std::string(SDL_GetBasePath()) + "sprites/overworld.png");
-	_spriteSheets["knight"] = loadTextureAutoDetect(renderer, std::string(SDL_GetBasePath()) + "sprites/knight.png", _autoTiles["knight"], { 0, 128, 128 }, { 0, 255, 0 }, 5, true, false, true);
+	_spriteSheets["sky_bg"] = loadTexture(renderer, std::string(SOURCE_DIR) + "/assets/" + "sprites/sky_bg.png");
+	_spriteSheets["castle_bg"] = loadTexture(renderer, std::string(SOURCE_DIR) + "/assets/" + "sprites/castle_prova.png");
+	_spriteSheets["trees1_bg"] = loadTexture(renderer, std::string(SOURCE_DIR) + "/assets/" + "sprites/trees1_prova.png");
+	_spriteSheets["trees2_bg"] = loadTexture(renderer, std::string(SOURCE_DIR) + "/assets/" + "sprites/trees2_prova.png");
+	_spriteSheets["mario"] = loadTextureAutoDetect(renderer, std::string(SOURCE_DIR) + "/assets/" + "sprites/mario.png", _autoTiles["mario"], {27, 89, 153}, { 147, 187, 236 });
+	_spriteSheets["enemies"] = loadTextureAutoDetect(renderer, std::string(SOURCE_DIR) + "/assets/" + "sprites/enemies.png", _autoTiles["enemies"], { 27, 89, 153 }, { 147, 187, 236 }, 17);
+	_spriteSheets["hud"] = loadTexture(renderer, std::string(SOURCE_DIR) + "/assets/" + "sprites/hud.png", { 147, 187, 236 });
+	_spriteSheets["tiles"] = loadTextureAutoDetect(renderer, std::string(SOURCE_DIR) + "/assets/" + "sprites/stage_tiles.png", _autoTiles["tiles"], { 27, 89, 153 }, { 147, 187, 236 }, 5, true, false);
+	_spriteSheets["overworld"] = loadTexture(renderer, std::string(SOURCE_DIR) + "/assets/" + "sprites/overworld.png");
+	_spriteSheets["knight"] = loadTextureAutoDetect(renderer, std::string(SOURCE_DIR) + "/assets/" + "sprites/knight.png", _autoTiles["knight"], { 0, 128, 128 }, { 0, 255, 0 }, 5, true, false, true);
 }
 
 // anchors
