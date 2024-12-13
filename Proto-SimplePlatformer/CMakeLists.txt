@@ -11,6 +11,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # get all source files within this folder
 file(GLOB sources *.h *.hpp *.cpp *.c)
 
+# define globally source path variable
+set(MY_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+add_definitions(-DSOURCE_DIR="${MY_SOURCE_DIR}")
+
 # libraries
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../core ${CMAKE_CURRENT_BINARY_DIR}/core_build)
 find_package(SDL2 REQUIRED)

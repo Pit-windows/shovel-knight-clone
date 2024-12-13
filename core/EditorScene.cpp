@@ -65,7 +65,7 @@ void EditorScene::generateGrid()
 
 void EditorScene::fromJson()
 {
-	std::ifstream f(std::string(SDL_GetBasePath()) + DEFAULT_SAVE_FILENAME);
+	std::ifstream f(std::string(SOURCE_DIR) + "/assets/" + DEFAULT_SAVE_FILENAME);
 	if (!f.is_open())
 		return;
 
@@ -82,7 +82,7 @@ void EditorScene::fromJson()
 
 void EditorScene::toJson()
 {
-	std::ofstream f(std::string(SDL_GetBasePath()) + DEFAULT_SAVE_FILENAME);
+	std::ofstream f(std::string(SOURCE_DIR) + "/assets/" + DEFAULT_SAVE_FILENAME);
 	if (!f.is_open())
 		return;
 
