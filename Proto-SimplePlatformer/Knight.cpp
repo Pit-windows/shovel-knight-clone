@@ -120,6 +120,16 @@ void Knight::run(bool on)
 
 void Knight::attack()
 {
+	if (_dying || _dead)
+		return;
+
+	Audio::instance()->playSound("sword");
+
+	if ( midair())
+	{
+
+	}
+
 }
 
 void Knight::die()
