@@ -114,7 +114,7 @@ Scene* LevelLoader::load(const std::string& name)
 	if (name == "overworld")
 	{
 		PlatformerGameScene* world = new PlatformerGameScene(RectF(0, 0, 427, 80), { 16,16 }, 1 / 100.0f);
-		
+		std::cout << SOURCE_DIR;
 		new RenderableObject(world, RectF(0, 0, 427, 80), spriteLoader->get("overworld"));
 
 		Knight* player = new Knight(world, PointF(7, 49));
