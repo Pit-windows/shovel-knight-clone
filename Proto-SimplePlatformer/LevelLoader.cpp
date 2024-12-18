@@ -114,14 +114,13 @@ Scene* LevelLoader::load(const std::string& name)
 	if (name == "overworld")
 	{
 		PlatformerGameScene* world = new PlatformerGameScene(RectF(0, 0, 427, 80), { 16,16 }, 1 / 100.0f);
-		std::cout << SOURCE_DIR;
 		new RenderableObject(world, RectF(0, 0, 427, 80), spriteLoader->get("overworld"));
 
 		Knight* player = new Knight(world, PointF(7, 49));
 		world->setPlayer(player);
 
 		// Caricamento oggetti dal file json generato dal level editor
-		loadJson(world, std::string(SDL_GetBasePath()) + "EditorScene.json", player);
+		loadJson(world, std::string(SOURCE_DIR) + "EditorScene.json", player);
 
 
 		world->addBackgroundScene(new OverlayScene(world, spriteLoader->get("sky_bg"), { 0,0 }, false, { 16,16 }, { 0,1 }));
